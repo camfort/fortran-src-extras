@@ -1,0 +1,7 @@
+# Stack
+/.stack-work
+
+# Editor tmp files
+.*.swp
+.*.swo
+*~
