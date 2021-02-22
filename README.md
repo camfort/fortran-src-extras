@@ -5,7 +5,7 @@ fortran-src.
 Originally from a Bloomberg internal common package.
 
 ## Original package README
-### `Bloomberg.FortranSrcTools.Common`
+### `Language.Fortran.Extras`
 
 #### `getProgramFile :: String -> String -> IO (ProgramFile A0)`
 
@@ -63,27 +63,9 @@ This function is similar to `withProgramFile`, but the handler will accept `Prog
 This function is similar to `withProgramAnalysis`, but it also allows the user to provide additional CLI options parser. This way tools using this function can specify additional CLI options. The handler function is extended to also take additional options object.
 
 
-### `Bloomberg.FortranSrcTools.Common.Rewriter`
+### `Language.Fortran.Rewriter`
 
-This module exposes an interface making it possible to rewrite Fortran source code by supplying a replacement map consisting of replacements keyed by a file name:
-
-```
-[("foo.f", [Replacement (SourceRange (SourceLocation 0 0) (SourceLocation 1 1)) ""]), ("bar.f", [])]
-```
-
-This is provided by `processReplacements` as the main entry point.
-
-```Haskell
-processReplacements :: Bloomberg.FortranSrcTools.Common.Rewriter.Internal.ReplacementMap -> IO ()
-```
-
-The contents of the Replacement replaces the characters within the SourceRange specified by the SourceLocations. The length of the replacement text is irrelevant and long lines will become continued lines automatically during rewriting.
-
-```Haskell
-data Replacement = Replacement SourceRange String deriving (Show, Eq)
-```
-
-Any exception will be raised in the instance that replacements would overlap or be written at invalid places (such as at a negative source location).
+The rewriter is now stored in `fortran-src`.
 
 ## Contributors
 ### Original package
