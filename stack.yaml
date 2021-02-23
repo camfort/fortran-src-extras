@@ -2,5 +2,4 @@ resolver: lts-17.0
 
 extra-deps:
 - git: https://github.com/camfort/fortran-src
-#  commit: 18a3f982a2c7e7fd471ccbfcddd724b01c8b1cfa # master 2021-02-04
-  commit: 900a8fa5e27752b7d9d3cae52011d4bffae3ad01
+  commit: a417bd80f65f34183fb741dd38dc431b7344d728

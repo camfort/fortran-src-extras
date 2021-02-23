@@ -14,14 +14,10 @@ import           Language.Fortran.Util.ModFile  ( emptyModFile
                                                 , ModFiles
                                                 , modFileSuffix
                                                 )
+import           Language.Fortran.Util.Files    ( rGetDirContents )
 import           System.FilePath                ( takeExtension
                                                 , (</>)
                                                 )
-import           System.Directory               ( canonicalizePath
-                                                , doesDirectoryExist
-                                                , getDirectoryContents
-                                                )
-import           Data.List                      ( (\\) )
 
 -- | Return TRUE iff the file extension indicates a module file.
 isModFile :: String -> Bool
@@ -52,22 +48,3 @@ decodeModFiles = foldM
     return $ addedModFiles ++ modFiles
   )
   emptyModFiles
-
--- | Obtain a list of files in a directory excluding the symbolic links
--- to itself and the parent.
-rGetDirContents :: FilePath -> IO [FilePath]
-rGetDirContents d = canonicalizePath d >>= \d' -> go [d'] d'
- where
-  go seen dir = do
-    ds <- getDirectoryContents dir
-    -- remove '.' and '..' entries
-    fmap concat . mapM f $ ds \\ [".", ".."]
-   where
-    f x = do
-      path <- canonicalizePath $ dir ++ "/" ++ x
-      g    <- doesDirectoryExist path
-      if g && notElem path seen
-        then do
-          x' <- go (path : seen) path
-          return $ map (\y -> x ++ "/" ++ y) x'
-        else return [x]
