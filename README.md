@@ -75,7 +75,6 @@ Thanks to the original fortran-common package authors:
   * Anthony Burzillo
   * Daniel Beer
   * Aiden Jeffrey
-  * Beleth Apophis
   * Raoul Hidalgo Charman
   * Lukasz Kolodziejczyk
   * Eric Seidel
