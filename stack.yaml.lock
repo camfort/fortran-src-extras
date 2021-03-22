@@ -3,7 +3,14 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: fortran-src-0.4.2@sha256:4da54322a4a2ff60437923397412805547de534daec57cf1c85ef35fddda0a8b,5422
+    pantry-tree:
+      size: 5091
+      sha256: 373f83369bab58704ab84da285e0e3802671ab834774c45bf92bcfef97b0a827
+  original:
+    hackage: fortran-src-0.4.2@sha256:4da54322a4a2ff60437923397412805547de534daec57cf1c85ef35fddda0a8b,5422
 snapshots:
 - completed:
     size: 563100

@@ -1,5 +1,4 @@
 resolver: lts-17.0
 
 extra-deps:
-- git: https://github.com/camfort/fortran-src
-  commit: a417bd80f65f34183fb741dd38dc431b7344d728
+- fortran-src-0.4.2@sha256:4da54322a4a2ff60437923397412805547de534daec57cf1c85ef35fddda0a8b,5422

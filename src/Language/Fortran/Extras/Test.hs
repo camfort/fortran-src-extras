@@ -37,7 +37,7 @@ getTestProgramAnalysisIncludes p incls = do
   cts <- flexReadFile p
   versionedExpandedProgramAnalysis Fortran77Legacy incls p cts
 
--- | Utitlity function to compare file content
+-- | Utility function to compare file content
 compareFile :: FilePath -> FilePath -> IO Bool
 compareFile expected actual = do
   c1 <- BC.readFile expected
