@@ -1,7 +1,7 @@
 ## 0.1.0
-Initial release, code adapted from a Bloomberg internal package.
+Initial release.
 
-### Major changes from original internal package
+### Major changes from original package
   * Base module name moved from `Bloomberg.FortranSrcTools.Common` to
     `Language.Fortran.Extras`.
   * Use `Language.Fortran.Util.Position.getSpan` instead of `extractExpSrcSpan`,
