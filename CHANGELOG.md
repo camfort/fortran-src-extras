@@ -1,6 +1,8 @@
-## 0.1.1
+## 0.1.1 (Unreleased)
   * Minor changes to the documentation
   * Minor changes to provided `withProgramAnalysis` interface to include verbose mode
+  * Add Aeson instances for SemType
+  * Update fortran-src dependency
 
 ## 0.1.0
 Initial release.
