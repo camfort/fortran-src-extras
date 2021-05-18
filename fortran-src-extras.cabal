@@ -1,10 +1,10 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.33.0.
+-- This file has been generated from package.yaml by hpack version 0.34.4.
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 58acdfe9c45070482fedea0466e7e18d8b2fcb95dbe956761a628ca1a3067696
+-- hash: a63397f7d91962abe2c2fe4c0883911b0682c62edebac941abe7e27e95ca4148
 
 name:           fortran-src-extras
 version:        0.1.1
@@ -47,7 +47,7 @@ library
     , containers >=0.5.0.0
     , directory >=1.3.0.2
     , filepath >=1.4.1.2
-    , fortran-src >=0.4.2
+    , fortran-src >=0.5.0
     , optparse-applicative >=0.14
     , text >=1.2.2.2
     , uniplate >=1.6.10
@@ -67,9 +67,9 @@ test-suite spec
       hspec-discover:hspec-discover
   build-depends:
       base >=4.7 && <5
-    , fortran-src >=0.4.2
+    , fortran-src >=0.5.0
     , fortran-src-extras
     , hspec >=2.2 && <3
-    , silently >=1.2 && <1.3
+    , silently ==1.2.*
     , uniplate >=1.6.10
   default-language: Haskell2010

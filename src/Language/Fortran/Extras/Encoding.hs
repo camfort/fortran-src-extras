@@ -7,8 +7,10 @@ import           Data.Aeson                     ( ToJSON
                                                 , FromJSON
                                                 , encode
                                                 )
-import           Language.Fortran.AST           ( BaseType
-                                                , CharacterLen
+import           Language.Fortran.AST           ( BaseType )
+import           Language.Fortran.Analysis.SemanticTypes
+                                                ( CharacterLen
+                                                , SemType
                                                 )
 import           Language.Fortran.Version       ( FortranVersion(..) )
 import           Language.Fortran.PrettyPrint   ( IndentablePretty
@@ -33,6 +35,9 @@ instance FromJSON SrcSpan
 
 instance ToJSON CharacterLen
 instance FromJSON CharacterLen
+
+instance ToJSON SemType
+instance FromJSON SemType
 
 instance ToJSON BaseType
 instance FromJSON BaseType

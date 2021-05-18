@@ -37,8 +37,8 @@ versionedExpandedProgramFile version importDirs path contents = case version of
 versionedProgramFile
   :: FortranVersion -> String -> B.ByteString -> ProgramFile A0
 versionedProgramFile version path contents =
-  let Just parserF = lookup version parserVersions
-      pf           = fromRight $ parserF contents path -- Parse contents of file
+  let parserF = parserVersions version
+      pf      = fromRight $ parserF contents path -- Parse contents of file
   in  pf
 
 -- | Obtain a 'ProgramFile' from a parser version deduced by inspection
