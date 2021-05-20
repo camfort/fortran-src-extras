@@ -1,3 +1,7 @@
+## 0.1.1
+  * Minor changes to the documentation
+  * Minor changes to provided `withProgramAnalysis` interface to include verbose mode
+
 ## 0.1.0
 Initial release.
 

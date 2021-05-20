@@ -106,7 +106,7 @@ programAnalysis options = do
 
 -- | Parse arguments and return 'ProgramFile'
 --
--- This function has the purpose of being the general entry-point for the `fortran-src-tools` tools.
+-- This function has the purpose of being a general entry-point for `fortran-src-tools` tools.
 -- It handles parsing the common arguments and then returns a 'ProgramFile' that the tool can then use to
 -- do further processing.
 -- 

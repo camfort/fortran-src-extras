@@ -27,6 +27,7 @@ import           Language.Fortran.Util.Files
 -- of the source
 data FortranSrcRunOptions = FortranSrcRunOptions
     { version  :: !FortranVersion
+    , verbose  :: Bool
     , includes :: ![String]
     , path     :: !String
     } deriving Show
@@ -35,10 +36,10 @@ data FortranSrcRunOptions = FortranSrcRunOptions
 -- 'FortranSrcRunOptions'
 --
 -- Note that this will throw an exception on an unrecognized version string.
-toFortranSrcOptions :: String -> [String] -> String -> FortranSrcRunOptions
-toFortranSrcOptions verStr =
+toFortranSrcOptions :: String -> Bool -> [String] -> String -> FortranSrcRunOptions
+toFortranSrcOptions verStr verboseFlag =
     let (Just ver) = selectFortranVersion verStr
-     in FortranSrcRunOptions ver
+     in FortranSrcRunOptions ver verboseFlag
 
 -- | Definition of parser for 'FortranSrcRunOptions'
 fortranSrcRunOptionsParser :: Parser FortranSrcRunOptions
@@ -51,6 +52,8 @@ fortranSrcRunOptionsParser =
           <> help
                "Fortran version to use, format: Fortran[66/77/77l/77e/90/95/03/08]"
           )
+    <*> (flag
+          False True (short 'V' <> long "verbose" <> help "Verbose mode for this tool"))
     <*> many
           (strOption
             (short 'I' <> long "include" <> metavar "DIRECTORY" <> help
