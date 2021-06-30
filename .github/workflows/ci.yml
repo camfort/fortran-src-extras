@@ -39,11 +39,12 @@ jobs:
     name: Ubuntu / GHC ${{ matrix.ghc }}, Cabal ${{ matrix.cabal }}
     strategy:
       matrix:
-        cabal: ["3.2"] # latest as of 2021-02-23
+        cabal: ["3.4"] # latest as of 2021-06-30
         ghc:
         - "8.6"
         - "8.8"
         - "8.10"
+        - "9.0"
     steps:
 
     # TODO: GHC decides to recompile based on timestamp, so cache isn't used
