@@ -1,4 +1,4 @@
-## 0.2.0 (Unreleased)
+## 0.2.0 (2021-06-30)
   * Minor changes to the documentation
   * Minor changes to provided `withProgramAnalysis` interface to include verbose mode
   * Add Aeson instances for SemType
