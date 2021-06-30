@@ -1,4 +1,4 @@
-## 0.1.1 (Unreleased)
+## 0.2.0 (Unreleased)
   * Minor changes to the documentation
   * Minor changes to provided `withProgramAnalysis` interface to include verbose mode
   * Add Aeson instances for SemType
