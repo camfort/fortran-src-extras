@@ -1,5 +1,5 @@
 -- | This module exposes functions obtaining both explicitly versioned
--- and implicitly versionied analyses of source code.
+-- and implicitly versioned analyses of source code.
 module Language.Fortran.Extras.Analysis
   ( versionedExpandedProgramAnalysis
   , versionedProgramAnalysis
