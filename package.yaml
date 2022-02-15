@@ -13,8 +13,9 @@ extra-source-files:
 
 dependencies:
 - base >= 4.7 && <5
-- fortran-src >= 0.5.0
+- fortran-src >= 0.9.0
 - uniplate >= 1.6.10
+- either # TODO
 
 library:
   source-dirs: src

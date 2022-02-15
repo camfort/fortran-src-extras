@@ -1,7 +1,8 @@
 ## 0.3.0 (Unreleased)
+  * Update to fortran-src 0.9.0
   * Remove `Language.Fortran.Extras.ModFiles`. The functions are available
-    in fortran-src 0.9.0 (or the first version after 0.8.0). `decodeModFiles` is
-    renamed to `Language.Fortran.Util.ModFile.decodeModFiles'`.
+    in fortran-src 0.9.0. `decodeModFiles` is renamed to
+    `Language.Fortran.Util.ModFile.decodeModFiles'`.
 
 ## 0.2.0 (2021-06-30)
   * Minor changes to the documentation

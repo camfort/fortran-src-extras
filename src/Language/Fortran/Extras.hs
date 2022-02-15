@@ -32,8 +32,7 @@ import qualified Language.Fortran.Extras.ProgramFile
                                                as P
 import qualified Language.Fortran.Extras.Analysis
                                                as A
-import           Language.Fortran.Extras.ModFiles
-                                                ( decodeModFiles )
+import           Language.Fortran.Util.ModFile  ( decodeModFiles' )
 import           Language.Fortran.Extras.RunOptions
                                                 ( unwrapFortranSrcOptions
                                                 , getFortranSrcRunOptions
@@ -98,7 +97,7 @@ programAnalysis options = do
     _ -> if null pfIncludes
       then return $ A.versionedProgramAnalysis fVersion pfPath pfContents
       else do
-        pfMods <- decodeModFiles pfIncludes
+        pfMods <- decodeModFiles' pfIncludes
         return $ A.versionedProgramAnalysisWithMods fVersion
                                                     pfMods
                                                     pfPath
