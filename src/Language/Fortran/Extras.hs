@@ -1,10 +1,13 @@
+{-# LANGUAGE TupleSections #-}
+
 module Language.Fortran.Extras where
 
 import           Control.Exception              ( try
                                                 , SomeException
                                                 )
 import           Data.Data                      ( Data )
-import           Data.List                      ( find )
+import           Data.List                      ( find
+                                                )
 import           Data.Maybe                     ( fromMaybe
                                                 , mapMaybe
                                                 )
@@ -20,6 +23,7 @@ import           Language.Fortran.Analysis      ( Analysis
                                                 , puSrcName
                                                 )
 import           Language.Fortran.Version       ( FortranVersion(..) )
+import           System.FilePath                ( takeExtension )
 import           System.Exit                    ( ExitCode(..)
                                                 , exitWith
                                                 )
@@ -28,6 +32,7 @@ import           System.IO                      ( hPutStr
                                                 , stderr
                                                 )
 import           Options.Applicative
+import           Language.Fortran.Parser        ( f77lIncIncludes )
 import qualified Language.Fortran.Extras.ProgramFile
                                                as P
 import qualified Language.Fortran.Extras.Analysis
@@ -85,6 +90,11 @@ programFile options = do
     Fortran77Legacy ->
       P.versionedExpandedProgramFile fVersion pfIncludes pfPath pfContents
     _ -> return $ P.versionedProgramFile fVersion pfPath pfContents
+
+incFile :: FortranSrcRunOptions -> IO [Block A0]
+incFile options = do
+  (pfPath, pfContents, pfIncludes, _fVersion) <- unwrapFortranSrcOptions options
+  f77lIncIncludes pfIncludes pfPath pfContents
 
 -- | Get a 'ProgramFile' with 'Analysis' from version and path specified
 -- in 'FortranSrcRunOptions'
@@ -202,6 +212,24 @@ withToolOptionsAndProgramAnalysis programDescription programHeader toolOptsParse
           (fortranSrcOpts options, toolOpts options)
     results <- try $ programAnalysis fortranSrcOptions >>= handler toolOptions
     errorHandler (path fortranSrcOptions) results
+
+-- | Given a program description, a program header, cli options parser, and a
+-- handler which takes the cli options and either an include files '[Block A0]'
+-- or 'Programfile A0', run the handler on the appropriately parsed source,
+-- parsing anything that has the ".inc" extension as an include
+withToolOptionsAndProgramOrBlock
+  :: String
+  -> String
+  -> Parser a
+  -> (a -> Either (FilePath, [Block A0]) (ProgramFile A0) -> IO ())
+  -> IO ()
+withToolOptionsAndProgramOrBlock programDescription programHeader optsParser handler = do
+  RunOptions srcOptions toolOptions <-
+    getRunOptions programDescription programHeader optsParser
+  ast <- if takeExtension (path srcOptions) == ".inc"
+    then Left . (path srcOptions, ) <$> incFile srcOptions
+    else Right <$> programFile srcOptions
+  handler toolOptions ast
 
 -- | Given a 'ProgramUnit' return a pair of the name of the unit as well as the unit itself
 -- only if the 'ProgramUnit' is a 'PUMain', 'PUSubroutine', or a 'PUFunction'
