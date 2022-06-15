@@ -11,9 +11,6 @@ module Language.Fortran.Extras.RunOptions
 where
 
 import qualified Data.ByteString.Char8         as B
-import           Data.Char                      ( toLower )
-import           Data.List                      ( isInfixOf )
-import           Data.Semigroup                 ( (<>) )
 import           Language.Fortran.Version       ( FortranVersion(..)
                                                 , selectFortranVersion
                                                 )
