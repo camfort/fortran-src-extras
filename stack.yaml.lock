@@ -3,17 +3,21 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages:
-- completed:
-    hackage: fortran-src-0.9.0@sha256:4912cbe951bb28681ef2c17bde35392a588c8c4290b54cfac9a5185f3f104074,9206
-    pantry-tree:
-      size: 8799
-      sha256: 6a23e09e54d84a2830c6a910323428bc654b2bbddd2d461cb9ecbb40af8bff3d
-  original:
-    hackage: fortran-src-0.9.0@sha256:4912cbe951bb28681ef2c17bde35392a588c8c4290b54cfac9a5185f3f104074,9206
 snapshots:
-- completed:
-    size: 586296
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/18.yaml
+- original: lts-18.18
+  completed:
     sha256: 63539429076b7ebbab6daa7656cfb079393bf644971156dc349d7c0453694ac2
-  original: lts-18.18
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/18.yaml
+    size: 586296
+packages:
+- original:
+    git: https://github.com/camfort/fortran-src
+    commit: 44a70028f6f705d0a26ca4d5d9877d3468b0d153
+  completed:
+    pantry-tree:
+      sha256: 46e1953dc85039d9e6709b154263f5d31d32959f4df378e3633edb1809f315bc
+      size: 9670
+    version: 0.9.0
+    git: https://github.com/camfort/fortran-src
+    name: fortran-src
+    commit: 44a70028f6f705d0a26ca4d5d9877d3468b0d153
