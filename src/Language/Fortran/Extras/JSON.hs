@@ -110,7 +110,7 @@ instance ToJSON a => ToJSON (Declarator a) where
     -- TODO toEncoding
 
 instance ToJSON a => ToJSON (Suffix a) where
-    toJSON (SfxBind a s e) = tja "bind" a s ["expr" .= e]
+    toJSON (SfxBind a s e) = tja "bind" a s ["expression" .= e]
     -- TODO toEncoding
 
 instance ToJSON a => ToJSON (Attribute a) where
@@ -182,17 +182,17 @@ instance ToJSON a => ToJSON (ControlPair a) where
 
 instance ToJSON a => ToJSON (FlushSpec a) where
     toJSON     = \case
-      FSUnit   a s e -> tja "unit" a s ["expr" .= e]
-      FSIOStat a s e -> tja "unit" a s ["expr" .= e]
-      FSIOMsg  a s e -> tja "unit" a s ["expr" .= e]
-      FSErr    a s e -> tja "unit" a s ["expr" .= e]
+      FSUnit   a s e -> tja "unit" a s ["expression" .= e]
+      FSIOStat a s e -> tja "unit" a s ["expression" .= e]
+      FSIOMsg  a s e -> tja "unit" a s ["expression" .= e]
+      FSErr    a s e -> tja "unit" a s ["expression" .= e]
     -- TODO toEncoding
 
 instance ToJSON a => ToJSON (AllocOpt a) where
     toJSON     = \case
-      AOStat   a s e -> tja "stat" a s ["expr" .= e]
-      AOErrMsg a s e -> tja "stat" a s ["expr" .= e]
-      AOSource a s e -> tja "stat" a s ["expr" .= e]
+      AOStat   a s e -> tja "stat" a s ["expression" .= e]
+      AOErrMsg a s e -> tja "stat" a s ["expression" .= e]
+      AOSource a s e -> tja "stat" a s ["expression" .= e]
     -- TODO toEncoding
 
 instance ToJSON a => ToJSON (Use a) where
@@ -256,17 +256,17 @@ instance ToJSON a => ToJSON (Expression a) where
       ExpBinary         a s op el er ->
         tja "binary"         a s ["op" .= op, "left" .= el, "right" .= er]
       ExpUnary          a s op e ->
-        tja "unary"          a s ["op" .= op, "expr" .= e]
+        tja "unary"          a s ["op" .= op, "expression" .= e]
       ExpSubscript      a s e idxs ->
-        tja "subscript"      a s ["expr" .= e, "indices" .= idxs]
+        tja "subscript"      a s ["expression" .= e, "indices" .= idxs]
       ExpDataRef        a s e1 e2 ->
-        tja "deref"          a s ["expr" .= e1, "field" .= e2]
+        tja "deref"          a s ["expression" .= e1, "field" .= e2]
       ExpFunctionCall   a s fn args ->
         tja "function_call"  a s ["function" .= fn, "arguments" .= args]
       ExpImpliedDo      a s exps spec ->
-        tja "implied_do"     a s ["exprs" .= exps, "do_spec" .= spec]
+        tja "implied_do"     a s ["expressions" .= exps, "do_spec" .= spec]
       ExpInitialisation a s exps ->
-        tja "initialisation" a s ["exprs" .= exps]
+        tja "initialisation" a s ["expressions" .= exps]
       ExpReturnSpec     a s tgt  ->
         tja "return_spec"    a s ["target" .= tgt]
     -- TODO toEncoding
@@ -408,13 +408,13 @@ instance ToJSON a => ToJSON (Statement a) where
       StIfLogical a s cond stmt -> tja "if_logical" a s
         ["condition" .= cond, "statement" .= stmt]
       StIfArithmetic a s e lt eq gt -> tja "if_arithmetic" a s
-        [ "expr"    .= e
+        [ "expression"    .= e
         , "less"    .= lt
         , "equal"   .= eq
         , "greater" .= gt ]
 
       StSelectCase a s nm e    -> tja "select_case" a s
-        ["name" .= nm, "expr" .= e]
+        ["name" .= nm, "expression" .= e]
       StCase       a s nm idxs -> tja "case"        a s
         ["name" .= nm, "indices" .= idxs]
       StEndcase    a s nm      -> tja "end_select"  a s
@@ -424,9 +424,9 @@ instance ToJSON a => ToJSON (Statement a) where
         ["name" .= fn, "arguments" .= args, "body" .= body]
 
       StExpressionAssign a s tgt e     -> tja "assign_expression" a s
-        ["target" .= tgt, "expr" .= e]
+        ["target" .= tgt, "expression" .= e]
       StPointerAssign    a s eFrom eTo -> tja "assign_pointer"    a s
-        ["target" .= eFrom, "expr" .= eTo]
+        ["target" .= eFrom, "expression" .= eTo]
       StLabelAssign      a s lbl tgt   -> tja "assign_label"      a s
         ["target" .= tgt, "label" .= lbl]
 
@@ -476,12 +476,12 @@ instance ToJSON a => ToJSON (Statement a) where
         ["pointers" .= es, "options" .= os]
 
       StWhere a s e asn -> tja "where" a s
-        ["expr" .= e, "assignment" .= asn]
+        ["expression" .= e, "assignment" .= asn]
 
       StWhereConstruct a s nm e -> tja "where_start" a s
-        ["name" .= nm, "expr" .= e]
+        ["name" .= nm, "expression" .= e]
       StElsewhere      a s nm e -> tja "elsewhere"   a s
-        ["name" .= nm, "expr" .= e]
+        ["name" .= nm, "expression" .= e]
       StEndWhere       a s nm   -> tja "end_where"   a s
         ["name" .= nm]
 

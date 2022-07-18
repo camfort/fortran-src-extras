@@ -5,19 +5,15 @@
 
 packages:
 - completed:
-    name: fortran-src
-    version: 0.9.0
-    git: https://github.com/camfort/fortran-src
+    hackage: fortran-src-0.10.0@sha256:6da6983d8e5896a8f8fd614872fa331edd49f2271725fc22ca233ceb4eef2668,9467
     pantry-tree:
-      size: 9716
-      sha256: d863aff44b2ad14b42f26b2559da4771a8e481d0037b322ee1b1838610652992
-    commit: 2abf718d38145712ad18b2cc5d611cc548edbdc0
+      size: 9297
+      sha256: e7f3c33af1b34aa58e1a4a17de917be20ba73264a121601aef76e4b0702edaa2
   original:
-    git: https://github.com/camfort/fortran-src
-    commit: 2abf718d38145712ad18b2cc5d611cc548edbdc0
+    hackage: fortran-src-0.10.0@sha256:6da6983d8e5896a8f8fd614872fa331edd49f2271725fc22ca233ceb4eef2668,9467
 snapshots:
 - completed:
-    size: 586296
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/18.yaml
-    sha256: 63539429076b7ebbab6daa7656cfb079393bf644971156dc349d7c0453694ac2
-  original: lts-18.18
+    size: 614841
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2022/7/4.yaml
+    sha256: 2d44a08a35e492f0d547eddf9007f4e4a71614101bb0f3dfca90a8b9eea0bc72
+  original: nightly-2022-07-04

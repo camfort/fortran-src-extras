@@ -1,8 +1,11 @@
 ## Unreleased
-  * Update to fortran-src X.Y.Z
+  * Update to fortran-src X.Y.Z TODO
   * Add helpers for using Fortran 77 include parser with IO actions
     `Language.Fortran.Extras.withToolOptionsAndProgramOrBlock`
   * Add `ToJSON` instances for data types in `Language.Fortran.AST`
+    * See `docs/json/schema.md` for notes on migrating from inspiration schema
+  * Add fortran-src-extras executable with a command for serializing Fortran
+    source into JSON (and YAML)
 
 ## 0.3.0 (2022-02-15)
   * Update to fortran-src 0.9.0

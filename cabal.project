@@ -1,6 +1,0 @@
-packages: .
-
-source-repository-package
-  type: git
-  location: https://github.com/camfort/fortran-src
-  tag: 2abf718d38145712ad18b2cc5d611cc548edbdc0
