@@ -13,6 +13,23 @@ JSON serialization of successfully parsed Fortran code, which can be parsed and
 used in any context supporting JSON. The hope is that parsing JSON is easier
 than parsing Fortran source code directly.
 
+## Major changes from inspiration schema
+These notes intend to assist migrating from the schema that inspired this one to
+this one. If something is unclear or not mentioned, try checking the relevant
+definition in `Language.Fortran.AST`, and fortran-src's changelog.
+
+  * serialize `a` annotation (at `anno` field)
+    * previously, a `ToJSON a` instance was enforced, but never used.
+  * complete schema: no partial instances, no `error`
+  * rework some AST nodes:
+    * overhaul `BaseType`
+    * comments are now plain strings, rather than objects with a `comment` key
+      (that is left up to the parent type)
+    * operators use plain English instead of symbols (easier to use in JSON)
+    * literals in `Value` use their printed form, and are re-parsed into
+      constituent parts during JSON parsing
+    * as well as JSON, executable can output pretty formatted YAML
+
 ## Outdated schema
 ### Introduction
 We use a BNF-style notation to describe the program structure. Program elements
