@@ -1,5 +1,5 @@
-## Unreleased
-  * Update to fortran-src X.Y.Z TODO
+## 0.3.1 (2022-07-18)
+  * Update to fortran-src 0.10.0
   * Add helpers for using Fortran 77 include parser with IO actions
     `Language.Fortran.Extras.withToolOptionsAndProgramOrBlock`
   * Add `ToJSON` instances for data types in `Language.Fortran.AST`
