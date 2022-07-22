@@ -1,3 +1,6 @@
+## Unreleased
+  * Serializer: add include inlining support (F77e only)
+
 ## 0.3.1 (2022-07-18)
   * Update to fortran-src 0.10.0
   * Add helpers for using Fortran 77 include parser with IO actions
