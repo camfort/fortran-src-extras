@@ -16,10 +16,6 @@ import           Language.Fortran.AST           ( A0
 import           Language.Fortran.Analysis      ( Analysis
                                                 , initAnalysis
                                                 )
-import           Language.Fortran.Analysis.Types
-                                                ( analyseTypes
-                                                , analyseTypesWithEnv
-                                                )
 import           Language.Fortran.Version       ( FortranVersion(..) )
 import           Language.Fortran.Util.ModFile  ( combinedTypeEnv
                                                 , ModFiles
@@ -33,14 +29,12 @@ import           Language.Fortran.Extras.ProgramFile
 
 -- | Obtain the analysis of the 'ProgramFile'.
 programAnalysis' :: ProgramFile A0 -> ProgramFile (Analysis A0)
-programAnalysis' = fst . analyseTypes . initAnalysis
+programAnalysis' = undefined
 
 -- | Obtain the analysis of the 'ProgramFile' and modules.
 programAnalysisWithMods'
   :: ModFiles -> ProgramFile A0 -> ProgramFile (Analysis A0)
-programAnalysisWithMods' mods =
-  let tenv = combinedTypeEnv mods
-  in  fst . analyseTypesWithEnv tenv . initAnalysis
+programAnalysisWithMods' = undefined
 
 -- | Obtain the analysis of source code with imports expanded using
 -- a specific version of the parser.
