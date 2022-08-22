@@ -1,5 +1,5 @@
 name: fortran-src-extras
-version: 0.3.1
+version: 0.3.2
 synopsis: Common functions and utils for fortran-src.
 description: Various utility functions and orphan instances which may be useful when using fortran-src.
 category: Language
@@ -41,8 +41,8 @@ ghc-options:
 
 dependencies:
 - base >= 4.7 && <5
-- fortran-src >= 0.10.0
-- aeson >= 1.2.3.0
+- fortran-src >= 0.10.1
+- aeson >= 1.5.0.0
 - bytestring >= 0.10.8.1
 - optparse-applicative >= 0.14
 - uniplate >= 1.6.10
