@@ -1,5 +1,7 @@
-## Unreleased
+## 0.3.2 (2022-08-22)
+  * Update to fortran-src 0.10.1
   * Serializer: add include inlining support (F77e only)
+  * Fix Aeson minimum bound
 
 ## 0.3.1 (2022-07-18)
   * Update to fortran-src 0.10.0
