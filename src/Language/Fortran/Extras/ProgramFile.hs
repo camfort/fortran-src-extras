@@ -22,7 +22,7 @@ versionedExpandedProgramFile
 versionedExpandedProgramFile v importDirs path contents =
     case v of
       Fortran77Legacy ->
-        Parser.f77lIncludes (takeDirectory path : importDirs) [] path contents
+        Parser.f77lInlineIncludes (takeDirectory path : importDirs) [] path contents
       _ -> error $ "Unsupported version: " ++ show v
 
 -- | Obtain a 'ProgramFile' from a specific version of the parser.
