@@ -5,15 +5,15 @@
 
 packages:
 - completed:
-    hackage: fortran-src-0.10.2@sha256:9fd8af81f7c4ee9cd519cbf06cb0cab22f8ed5340ebd271fb5040613952e1703,9659
+    hackage: fortran-src-0.12.0@sha256:9697274dc335ae5b24172162ef8fc54437e57f148c10eb593e72293c0587f586,12430
     pantry-tree:
-      size: 9297
-      sha256: 698f610ca3154e06550a64dddb02c6bab764fbe57af34161788e9b9529e91aee
+      sha256: 7049821d0f5fe8fcad5346c5577f6a33365dc961af67bf9ad671ae310ebf5e35
+      size: 12382
   original:
-    hackage: fortran-src-0.10.2
+    hackage: fortran-src-0.12.0
 snapshots:
 - completed:
-    size: 614841
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/nightly/2022/7/4.yaml
-    sha256: 2d44a08a35e492f0d547eddf9007f4e4a71614101bb0f3dfca90a8b9eea0bc72
-  original: nightly-2022-07-04
+    sha256: be747117bed6d462806c883352c3206325b23480825103f5c87884e97e52819a
+    size: 619173
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/20.yaml
+  original: lts-19.20

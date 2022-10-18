@@ -32,7 +32,7 @@ import           System.IO                      ( hPutStr
                                                 , stderr
                                                 )
 import           Options.Applicative
-import           Language.Fortran.Parser        ( f77lIncIncludes )
+import qualified Language.Fortran.Parser as Parser
 import qualified Language.Fortran.Extras.ProgramFile
                                                as P
 import qualified Language.Fortran.Extras.Analysis
@@ -93,8 +93,8 @@ programFile options = do
 
 incFile :: FortranSrcRunOptions -> IO [Block A0]
 incFile options = do
-  (pfPath, pfContents, pfIncludes, _fVersion) <- unwrapFortranSrcOptions options
-  f77lIncIncludes pfIncludes pfPath pfContents
+  (pfPath, pfContents, _pfIncludes, _fVersion) <- unwrapFortranSrcOptions options
+  Parser.throwIOLeft $ Parser.f77lIncludesNoTransform pfPath pfContents
 
 -- | Get a 'ProgramFile' with 'Analysis' from version and path specified
 -- in 'FortranSrcRunOptions'

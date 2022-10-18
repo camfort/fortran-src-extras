@@ -109,7 +109,7 @@ run cfg = do
           InlineIncludes ->
             case cfgVersion cfg of
               Fortran77Extended -> do
-                let parserM = F.Parser.f77lIncludes ("." : cfgIncludeDirs cfg) F.ModFile.emptyModFiles
+                let parserM = F.Parser.f77lInlineIncludes ("." : cfgIncludeDirs cfg) F.ModFile.emptyModFiles
                 src <- liftIO $ parserM (CLI.inStreamFileName sIn) bsIn
                 runEncodeAndPrint (cfgFormat cfg) sOut src
                 return $ Right ()
