@@ -9,6 +9,9 @@ on:
     - opened
     - synchronize
 
+env:
+  EXE_NAME: fortran-src-extras
+
 jobs:
   ubuntu-stack-test:
     runs-on: ubuntu-latest
@@ -34,6 +37,16 @@ jobs:
     - name: Build and run tests
       run: stack --no-terminal haddock --test --no-haddock-deps
 
+    - name: Install (to place executable at a known location)
+      run: stack --no-terminal install
+
+    - name: Upload executable
+      uses: actions/upload-artifact@v2
+      with:
+        path: ~/.local/bin/${{ env.EXE_NAME }}
+        name: ${{ env.EXE_NAME }}-ubuntu-stack-${{ github.sha }}
+        if-no-files-found: error
+
   ubuntu-cabal-test:
     runs-on: ubuntu-latest
     name: Ubuntu / GHC ${{ matrix.ghc }}, Cabal / test
@@ -41,10 +54,11 @@ jobs:
     strategy:
       fail-fast: false      # don't stop if one job (= GHC version) fails
       matrix:
-        cabal: ["3.4"]      # ghcup recommended as of 2021-09-24
+        cabal: [latest]
         ghc:
-        - "8.4"
-        - "9.0"
+        - "9.0.2"
+        - "9.2.4"
+        - "9.4.2"
 
     steps:
 
@@ -95,8 +109,8 @@ jobs:
     strategy:
       fail-fast: false      # don't stop if one job (= GHC version) fails
       matrix:
-        cabal: ["3.4"]      # ghcup recommended as of 2021-09-24
-        ghc: ["9.0"]
+        cabal: [latest]
+        ghc: ["9.2"]
     steps:
 
     # TODO figure out timestamp fixer on Mac (no Mac available to test)
@@ -122,12 +136,21 @@ jobs:
           ${{ runner.os }}-cabal-${{ matrix.ghc }}
 
     - name: Build
-      run: cabal build
+      run: cabal install
 
     - name: Test
       run: cabal test --test-show-details=streaming
       env:
         HSPEC_OPTIONS: --color
+
+    # note that Cabal uses symlinks -- actions/upload-artifact@v2 apparently
+    # dereferences for us
+    - name: Upload executable
+      uses: actions/upload-artifact@v2
+      with:
+        path: ~/.cabal/bin/${{ env.EXE_NAME }}
+        name: ${{ env.EXE_NAME }}-macos-ghc-${{ matrix.ghc }}-cabal-${{ github.sha }}
+        if-no-files-found: error
 
   windows-cabal-test:
     runs-on: windows-latest
@@ -135,8 +158,8 @@ jobs:
     strategy:
       fail-fast: false      # don't stop if one job (= GHC version) fails
       matrix:
-        cabal: ["3.4"]      # ghcup recommended as of 2021-09-24
-        ghc: ["9.0"]
+        cabal: [latest]
+        ghc: ["9.2"]
     steps:
     # TODO figure out timestamp fixer on Windows (need Bash)
     - uses: actions/checkout@v2
@@ -161,9 +184,16 @@ jobs:
           ${{ runner.os }}-cabal-${{ matrix.ghc }}
 
     - name: Build
-      run: cabal build
+      run: cabal install
 
     - name: Test
       run: cabal test --test-show-details=streaming
       env:
         HSPEC_OPTIONS: --color
+
+    - name: Upload executable
+      uses: actions/upload-artifact@v2
+      with:
+        path: "C:/cabal/bin/${{ env.EXE_NAME }}.exe"
+        name: ${{ env.EXE_NAME }}-windows-ghc-${{ matrix.ghc }}-cabal-${{ github.sha }}.exe
+        if-no-files-found: error
