@@ -1,5 +1,6 @@
-## Unreleased
-  * Update fortran-src
+## 0.4.0 (2022-10-19)
+  * Update to fortran-src 0.12.0 (bumps minimum compiler version to GHC 9.0)
+  * Set upper bounds for various dependencies
 
 ## 0.3.2 (2022-08-22)
   * Update to fortran-src 0.10.1
