@@ -7,7 +7,6 @@ import Language.Fortran.Extras.JSON()
 import Control.Monad.IO.Class
 import qualified Options.Applicative as OA
 import qualified Language.Fortran.Parser as F.Parser
-import qualified Language.Fortran.Parser.Monad as F.Parser -- TODO moved to Parser in next version
 import Language.Fortran.Version
 import qualified Language.Fortran.Util.ModFile as F.ModFile
 import qualified Raehik.CLI.Stream as CLI
