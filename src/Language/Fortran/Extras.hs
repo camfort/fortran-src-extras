@@ -226,7 +226,7 @@ withToolOptionsAndProgramOrBlock
 withToolOptionsAndProgramOrBlock programDescription programHeader optsParser handler = do
   RunOptions srcOptions toolOptions <-
     getRunOptions programDescription programHeader optsParser
-  ast <- if takeExtension (path srcOptions) == ".inc"
+  ast <- if takeExtension (path srcOptions) `elem` [".inc", ".ins"]
     then Left . (path srcOptions, ) <$> incFile srcOptions
     else Right <$> programFile srcOptions
   handler toolOptions ast
