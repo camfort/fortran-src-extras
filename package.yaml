@@ -1,5 +1,5 @@
 name: fortran-src-extras
-version: 0.4.0
+version: 0.4.1
 synopsis: Common functions and utils for fortran-src.
 description: Various utility functions and orphan instances which may be useful when using fortran-src.
 category: Language
