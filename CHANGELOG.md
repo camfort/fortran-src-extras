@@ -1,3 +1,7 @@
+## 0.4.1 (2023-03-15)
+  * fix testing from sdist package (some test data files weren't bundled)
+  * bump fortran-src upper bound to 0.13
+
 ## 0.4.0 (2022-10-19)
   * Update to fortran-src 0.12.0 (bumps minimum compiler version to GHC 9.0)
   * Set upper bounds for various dependencies
