@@ -10,6 +10,7 @@ maintainer: thefirstmuffinman@gmail.com
 extra-source-files:
 - README.md
 - CHANGELOG.md
+- test/input_data/**/*
 
 # 2022-01-25: raehik: the essentials + handful of syntax (most in GHC2021)
 # 2022-06-21: copied from fortran-src 6702ee51cf7c0df5007e165003f053baa65706c1
