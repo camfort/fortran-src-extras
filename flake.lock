@@ -18,6 +18,22 @@
         "type": "github"
       }
     },
+    "fortran-src": {
+      "flake": false,
+      "locked": {
+        "lastModified": 1679404287,
+        "narHash": "sha256-o/FnvujualUbSSCpOeZRzPegdwrTPAxjRYQF7e8xfyM=",
+        "owner": "camfort",
+        "repo": "fortran-src",
+        "rev": "4a890faa610c92a3e483c1cb32568de15a43fef6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "camfort",
+        "repo": "fortran-src",
+        "type": "github"
+      }
+    },
     "haskell-flake": {
       "locked": {
         "lastModified": 1678055462,
@@ -70,6 +86,7 @@
     "root": {
       "inputs": {
         "flake-parts": "flake-parts",
+        "fortran-src": "fortran-src",
         "haskell-flake": "haskell-flake",
         "nixpkgs": "nixpkgs"
       }

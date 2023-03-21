@@ -3,6 +3,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
     haskell-flake.url = "github:srid/haskell-flake";
+    fortran-src = {
+      url = "github:camfort/fortran-src";
+      flake = false;
+    };
   };
   outputs = inputs@{ self, nixpkgs, flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
@@ -11,7 +15,9 @@
       perSystem = { self', pkgs, ... }: {
         haskellProjects.default = {
           # packages.example.root = ./.;  # This value is detected based on .cabal files
-          # overrides = self: super: { };
+          overrides = self: super: {
+            fortran-src = self.callCabal2nix "fortran-src" inputs.fortran-src {};
+          };
           # devShell = {
           #  enable = true;  # Enabled by default
           #  tools = hp: { fourmolu = hp.fourmolu; ghcid = null; };
