@@ -19,25 +19,27 @@ import           Language.Fortran.Util.Files
                                                 ( flexReadFile )
 
 getTestProgramFile :: String -> IO (ProgramFile A0)
-getTestProgramFile p = do
-  cts <- flexReadFile p
-  versionedExpandedProgramFile Fortran77Legacy [] p cts
+getTestProgramFile = getTestProgramIncludesByVer Fortran77Legacy []
 
 getTestProgramFileIncludes :: String -> [String] -> IO (ProgramFile A0)
-getTestProgramFileIncludes p incls = do
-  cts <- flexReadFile p
-  versionedExpandedProgramFile Fortran77Legacy incls p cts
+getTestProgramFileIncludes p incls = getTestProgramIncludesByVer Fortran77Legacy incls p
+
+getTestProgramIncludesByVer :: FortranVersion -> [FilePath] -> FilePath -> IO (ProgramFile A0)
+getTestProgramIncludesByVer v incls p =
+  flexReadFile p >>= versionedExpandedProgramFile v incls p
 
 getTestProgramAnalysis :: String -> IO (ProgramFile (Analysis A0))
-getTestProgramAnalysis p = do
-  cts <- flexReadFile p
-  versionedExpandedProgramAnalysis Fortran77Legacy [] p cts
+getTestProgramAnalysis = getTestProgramAnalysisByVer Fortran77Legacy []
 
 getTestProgramAnalysisIncludes
   :: String -> [String] -> IO (ProgramFile (Analysis A0))
-getTestProgramAnalysisIncludes p incls = do
-  cts <- flexReadFile p
-  versionedExpandedProgramAnalysis Fortran77Legacy incls p cts
+getTestProgramAnalysisIncludes p incls =
+  getTestProgramAnalysisByVer Fortran77Legacy incls p
+
+getTestProgramAnalysisByVer
+  :: FortranVersion -> [FilePath] -> FilePath -> IO (ProgramFile (Analysis A0))
+getTestProgramAnalysisByVer v incls p = do
+  flexReadFile p >>= versionedExpandedProgramAnalysis v incls p
 
 -- | Utility function to compare file content
 compareFile :: FilePath -> FilePath -> IO Bool

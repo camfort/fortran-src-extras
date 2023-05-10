@@ -22,7 +22,6 @@ import           Language.Fortran.AST           ( A0
 import           Language.Fortran.Analysis      ( Analysis
                                                 , puSrcName
                                                 )
-import           Language.Fortran.Version       ( FortranVersion(..) )
 import           System.FilePath                ( takeExtension )
 import           System.Exit                    ( ExitCode(..)
                                                 , exitWith
@@ -37,7 +36,6 @@ import qualified Language.Fortran.Extras.ProgramFile
                                                as P
 import qualified Language.Fortran.Extras.Analysis
                                                as A
-import           Language.Fortran.Util.ModFile  ( decodeModFiles' )
 import           Language.Fortran.Extras.RunOptions
                                                 ( unwrapFortranSrcOptions
                                                 , getFortranSrcRunOptions
@@ -86,32 +84,19 @@ findPU n = findPU' $ Named n
 programFile :: FortranSrcRunOptions -> IO (ProgramFile A0)
 programFile options = do
   (pfPath, pfContents, pfIncludes, fVersion) <- unwrapFortranSrcOptions options
-  case fVersion of
-    Fortran77Legacy ->
-      P.versionedExpandedProgramFile fVersion pfIncludes pfPath pfContents
-    _ -> return $ P.versionedProgramFile fVersion pfPath pfContents
+  P.versionedExpandedProgramFile fVersion pfIncludes pfPath pfContents
 
 incFile :: FortranSrcRunOptions -> IO [Block A0]
 incFile options = do
-  (pfPath, pfContents, _pfIncludes, _fVersion) <- unwrapFortranSrcOptions options
-  Parser.throwIOLeft $ Parser.f77lIncludesNoTransform pfPath pfContents
+  (pfPath, pfContents, _pfIncludes, fVersion) <- unwrapFortranSrcOptions options
+  Parser.throwIOLeft $ Parser.byVerInclude fVersion pfPath pfContents
 
 -- | Get a 'ProgramFile' with 'Analysis' from version and path specified
 -- in 'FortranSrcRunOptions'
 programAnalysis :: FortranSrcRunOptions -> IO (ProgramFile (Analysis A0))
 programAnalysis options = do
   (pfPath, pfContents, pfIncludes, fVersion) <- unwrapFortranSrcOptions options
-  case fVersion of
-    Fortran77Legacy ->
-      A.versionedExpandedProgramAnalysis fVersion pfIncludes pfPath pfContents
-    _ -> if null pfIncludes
-      then return $ A.versionedProgramAnalysis fVersion pfPath pfContents
-      else do
-        pfMods <- decodeModFiles' pfIncludes
-        return $ A.versionedProgramAnalysisWithMods fVersion
-                                                    pfMods
-                                                    pfPath
-                                                    pfContents
+  A.versionedExpandedProgramAnalysis fVersion pfIncludes pfPath pfContents
 
 -- | Parse arguments and return 'ProgramFile'
 --
