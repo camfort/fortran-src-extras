@@ -66,7 +66,8 @@ library
       TupleSections
   ghc-options: -Wall
   build-depends:
-      GenericPretty >=1.2.1 && <1.3
+      Diff >=0.4.0
+    , GenericPretty >=1.2.1 && <1.3
     , aeson >=1.5 && <2.2
     , base >=4.7 && <5
     , bytestring >=0.10 && <0.12
@@ -108,7 +109,8 @@ executable fortran-src-extras
       TupleSections
   ghc-options: -Wall
   build-depends:
-      GenericPretty >=1.2.1 && <1.3
+      Diff >=0.4.0
+    , GenericPretty >=1.2.1 && <1.3
     , aeson >=1.5 && <2.2
     , base >=4.7 && <5
     , bytestring >=0.10 && <0.12
@@ -153,7 +155,8 @@ test-suite spec
   build-tool-depends:
       hspec-discover:hspec-discover
   build-depends:
-      GenericPretty >=1.2.1 && <1.3
+      Diff >=0.4.0
+    , GenericPretty >=1.2.1 && <1.3
     , aeson >=1.5 && <2.2
     , base >=4.7 && <5
     , bytestring >=0.10 && <0.12

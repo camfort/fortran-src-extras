@@ -2,6 +2,8 @@
 module Language.Fortran.Extras.Test where
 
 import qualified Data.ByteString.Lazy.Char8    as BC
+import           Data.Algorithm.Diff            ( getDiff )
+import           Data.Algorithm.DiffOutput      ( ppDiff )
 import           Language.Fortran.Analysis      ( Analysis )
 import           Language.Fortran.AST           ( A0
                                                 , ProgramFile
@@ -40,16 +42,12 @@ getTestProgramAnalysisIncludes p incls = do
 -- | Utility function to compare file content
 compareFile :: FilePath -> FilePath -> IO Bool
 compareFile expected actual = do
-  c1 <- BC.readFile expected
-  c2 <- BC.readFile actual
-  compareByteString c1 c2
+  c1 <- readFile expected
+  c2 <- readFile actual
+  diffFileContents c1 c2
 
-compareByteString :: BC.ByteString -> BC.ByteString -> IO Bool
-compareByteString expected actual = if expected == actual
-  then return True
-  else do
-    BC.putStrLn "<<<<<<< EXPECTED"
-    BC.putStrLn expected
-    BC.putStrLn ">>>>>>> ACTUAL"
-    BC.putStrLn actual
-    return False
+diffFileContents :: String -> String -> IO Bool
+diffFileContents s1 s2 = if s1 == s2
+  then pure True
+  else False <$ (putStrLn . ppDiff $ getDiff (toLines s1) (toLines s2))
+  where toLines = fmap pure . lines
