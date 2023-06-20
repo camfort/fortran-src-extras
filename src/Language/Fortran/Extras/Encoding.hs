@@ -22,5 +22,8 @@ commonEncode = encode
 pprint77l :: IndentablePretty a => a -> String
 pprint77l s = pprintAndRender Fortran77Legacy s Nothing
 
+getFilePath :: SrcSpan -> FilePath
+getFilePath (SrcSpan p _) = posFilePath p
+
 showFileSpan :: SrcSpan -> String
 showFileSpan s@(SrcSpan p _) = posFilePath p <> "-" <> show s
