@@ -49,8 +49,8 @@ fortranSrcRunOptionsParser =
           <> help
                "Fortran version to use, format: Fortran[66/77/77l/77e/90/95/03/08]"
           )
-    <*> (flag
-          False True (short 'V' <> long "verbose" <> help "Verbose mode for this tool"))
+    <*> flag
+          False True (short 'V' <> long "verbose" <> help "Verbose mode for this tool")
     <*> many
           (strOption
             (short 'I' <> long "include" <> metavar "DIRECTORY" <> help

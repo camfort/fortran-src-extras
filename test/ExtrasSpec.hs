@@ -9,8 +9,12 @@ import           System.IO                      ( stderr
                                                 )
 import           System.IO.Silently             ( hCapture_ )
 
+import           Language.Fortran.Util.Position ( Position(..)
+                                                , SrcSpan(..)
+                                                )
 import           Language.Fortran.Extras
                                                 ( errorHandler )
+import           Language.Fortran.Extras.Encoding
 
 spec :: Spec
 spec = describe "errorHandler" $ do
@@ -26,3 +30,5 @@ spec = describe "errorHandler" $ do
   it "Doesn't print to stdout" $ do
     out <- hCapture_ [stdout] $ doErr "stdout"
     null out `shouldBe` True
+  it "Shows file span" $ do
+    showFileSpan (SrcSpan (Position 1 2 3 "filepath" Nothing) (Position 4 5 6 "filepath" Nothing)) `shouldBe` "filepath-(3:2)-(6:5)"

@@ -11,7 +11,6 @@ import           Language.Fortran.Version   ( deduceFortranVersion
                                             )
 import qualified Language.Fortran.Parser    as Parser
 import           System.FilePath            ( takeDirectory )
-import           Data.Either.Combinators    ( fromRight' )
 
 -- | Obtain a 'ProgramFile' from a specific version of the parser with include
 -- statements expanded.
@@ -19,16 +18,15 @@ import           Data.Either.Combinators    ( fromRight' )
 -- TODO: cover all FortranVersions, instead of just Fortran77Legacy
 versionedExpandedProgramFile
   :: FortranVersion -> [String] -> String -> B.ByteString -> IO (ProgramFile A0)
-versionedExpandedProgramFile v importDirs path contents =
-    case v of
-      Fortran77Legacy ->
-        Parser.f77lInlineIncludes (takeDirectory path : importDirs) [] path contents
-      _ -> error $ "Unsupported version: " ++ show v
+versionedExpandedProgramFile v importDirs path =
+    Parser.byVerInlineIncludes v (takeDirectory path : importDirs) [] path
 
 -- | Obtain a 'ProgramFile' from a specific version of the parser.
 versionedProgramFile
   :: FortranVersion -> String -> B.ByteString -> ProgramFile A0
-versionedProgramFile v p c = fromRight' $ (Parser.byVer v) p c
+versionedProgramFile v p
+  = either (error . ("Parse error: " <>) . show) id
+  . Parser.byVer v p
 
 -- | Obtain a 'ProgramFile' from a parser version deduced by inspection
 -- of the file extension.
