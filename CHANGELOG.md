@@ -1,6 +1,9 @@
 ## 0.5.5 (2025-07-03)
   * bump fortran-src to ==0.16.\*
 
+## 0.5.0 (2023-03-21)
+  * bump fortran-src to ==0.14.\*
+
 ## 0.4.1 (2023-03-15)
   * fix testing from sdist package (some test data files weren't bundled)
   * bump fortran-src upper bound to 0.13
