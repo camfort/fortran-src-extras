@@ -31,4 +31,4 @@ spec = describe "errorHandler" $ do
     out <- hCapture_ [stdout] $ doErr "stdout"
     null out `shouldBe` True
   it "Shows file span" $ do
-    showFileSpan (SrcSpan (Position 1 2 3 "filepath" Nothing) (Position 4 5 6 "filepath" Nothing)) `shouldBe` "filepath-(3:2)-(6:5)"
+    showFileSpan (SrcSpan (Position 1 2 3 "filepath" Nothing) (Position 4 5 6 "filepath" Nothing)) `shouldBe` "filepath-(3:1)-(6:4)"
