@@ -19,6 +19,7 @@ import           Language.Fortran.Analysis      ( Analysis
 import           Language.Fortran.Analysis.Types
                                                 ( analyseTypes
                                                 , analyseTypesWithEnv
+                                                , stripExtended
                                                 )
 import           Language.Fortran.Version       ( FortranVersion(..) )
 import           Language.Fortran.Util.ModFile  ( combinedTypeEnv
@@ -39,7 +40,7 @@ programAnalysis' = fst . analyseTypes . initAnalysis
 programAnalysisWithMods'
   :: ModFiles -> ProgramFile A0 -> ProgramFile (Analysis A0)
 programAnalysisWithMods' mods =
-  let tenv = combinedTypeEnv mods
+  let tenv = stripExtended $ combinedTypeEnv mods
   in  fst . analyseTypesWithEnv tenv . initAnalysis
 
 -- | Obtain the analysis of source code with imports expanded using
