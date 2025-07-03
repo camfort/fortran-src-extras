@@ -14,7 +14,7 @@ main = execParserWithDefaults desc pCmd >>= \case
     Right ()  -> return ()
     Left  err -> print err
   where
-    desc = "fortran-src extra tools"
+    desc = "fortran-src extra tools - v0.5.5"
 
 pCmd :: OA.Parser Cmd
 pCmd = OA.hsubparser $
